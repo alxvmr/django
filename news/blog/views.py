@@ -118,6 +118,7 @@ class PostCategory(ListView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
+        #print(context)
         context['title'] = 'Категория - ' + str(context['posts'][0].cat)
         context['menu'] = menu
         context['cat_selected'] = context['posts'][0].cat_id

@@ -5,6 +5,7 @@ from django.core.exceptions import ValidationError
 
 from .models import *
 
+
 # class AddPostForm(forms.Form):
 #     title = forms.CharField(max_length=255, label='Заголовок', widget=forms.TextInput(attrs={'class': 'form-input'}))
 #     slug = forms.SlugField(max_length=255)
@@ -26,11 +27,11 @@ class AddPostForm(forms.ModelForm):  # форма идет от модели
             'content': forms.Textarea(attrs={'cols': 60, 'rows': 10}),
         }
 
-
     def clean_title(self):
         title = self.cleaned_data['title']
         if len(title) > 10:
             raise forms.ValidationError('Длина превышает 10 символов')
+        return title
 
 
 class RegisterUserForm(UserCreationForm):
@@ -42,6 +43,7 @@ class RegisterUserForm(UserCreationForm):
     class Meta:
         model = User
         fields = ('username', 'email', 'password1', 'password2')
+
 
 class LoginUserForm(AuthenticationForm):
     username = forms.CharField(label='Логин', widget=forms.TextInput(attrs={'class': 'form-input'}))
